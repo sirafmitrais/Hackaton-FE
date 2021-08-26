@@ -1,4 +1,6 @@
 import { ADD_LIST, ADD_TASK, DELETE_LIST, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, List, ListsAction, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, Task, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types";
+import SimpleSrv from "../../services/api/simpleService";
+
 
 export const addList = (list: List): ListsAction => {
     return {
@@ -10,6 +12,7 @@ export const addList = (list: List): ListsAction => {
 export const getList = (): ListsAction => {
     return {
         type: GET_LISTS
+        payload: data
     }
 }
 

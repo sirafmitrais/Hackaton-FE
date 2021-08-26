@@ -25,6 +25,7 @@ export interface Task {
 
 export interface List {
   name: string;
+  title: string;
   id: string;
   tasks: Task[];
 }
@@ -41,6 +42,7 @@ interface AddListAction {
 
 interface GetListsAction {
   type: typeof GET_LISTS;
+  payload: any
 }
 
 interface GetListByIdAction {

@@ -1,12 +1,16 @@
-import axios from "axios";
+// import axios from "axios";
+
+import instances from './AxiosInstance'
+
+
+const axios = instances.instancePlaceHolder.apiInstance()
 
 class SimpleSrv {
-    static SimpleFun(id: string) {
-        return 
-        axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then( res => {
-            console.log(res)
-            res.data
+    static getListTitle() {
+        return axios.get('')
+        .then( (res) => {
+            const response = res.data
+            return response
         })
         .catch( err => {
             console.log(err)
