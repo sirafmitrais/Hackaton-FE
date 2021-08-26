@@ -1,18 +1,39 @@
-import { ADD_LIST, ADD_TASK, DELETE_LIST, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, List, ListsAction, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, Task, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types";
+import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, List, Lists, ListsAction, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, Task, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types";
 import SimpleSrv from "../../services/api/simpleService";
 
+export type DispatchList = (args: ListsAction) => ListsAction
 
-export const addList = (list: List): ListsAction => {
-    return {
-        type: ADD_LIST,
-        payload: list
+export const addList = (title: string) => {
+    return (dispatch: DispatchList) => {
+        return SimpleSrv.createTitle(title)
+            .then((response) => {
+                console.log("create response", response)
+                dispatch({
+                    type: ADD_LIST,
+                    payload: response
+                })
+            })
+            .catch((err) => {
+                console.log("create error", err)
+                dispatch({
+                    type: ADD_LIST_FAILED,
+                    payload: err
+                })
+            })
     }
 }
 
-export const getList = (): ListsAction => {
-    return {
-        type: GET_LISTS
-        payload: data
+export const getList = () => {
+    return (dispatch: DispatchList) => {
+        return SimpleSrv.getListTitle()
+            .then((response)=> {
+                console.log("response action",response)
+                dispatch({
+                    type: GET_LISTS,
+                    payload: response 
+                    }
+                )
+            })
     }
 }
 

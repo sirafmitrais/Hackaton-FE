@@ -16,6 +16,19 @@ class SimpleSrv {
             console.log(err)
         })
     }
+
+    static createTitle(title: string) {
+        return axios
+        .post('',{title})
+        .then((res) => {
+            const response = res.data
+            return response
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
     
 }
 

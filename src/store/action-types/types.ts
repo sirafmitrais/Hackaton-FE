@@ -1,6 +1,8 @@
 export const GET_LISTS = 'GET_LISTS';
 export const GET_LIST_BY_ID = 'GET_LIST_BY_ID';
 export const ADD_LIST = 'ADD_LIST';
+export const ADD_LIST_FAILED = 'ADD_LIST_FAILED';
+
 export const DELETE_LIST = 'DELETE_LIST';
 export const UPDATE_LIST = 'UPDATE_LIST';
 export const SET_LISTID_TO_DELETE = 'SET_LISTID_TO_DELETE';
@@ -26,6 +28,7 @@ export interface Task {
 export interface List {
   name: string;
   id: string;
+  title: string;
   tasks: Task[];
 }
 
@@ -39,8 +42,14 @@ interface AddListAction {
   payload: List;
 } 
 
+interface AddListActionFailed {
+  type: typeof ADD_LIST_FAILED;
+  payload: string;
+}
+
 interface GetListsAction {
   type: typeof GET_LISTS;
+  payload: Lists;
 }
 
 interface GetListByIdAction {
@@ -134,7 +143,7 @@ interface SetNotificationAction {
   }
 }
 
-export type ListsAction = AddListAction | GetListsAction | GetListByIdAction | SetListIdToDeleteAction | SetListToEditAction | DeleteListAction | UpdateListAction | SetSelectedListAction | AddTaskAction | DeleteTaskAction | SetTaskToDeleteAction | UnsetTaskToDeleteAction | EditTaskAction | SetTaskToEditAction | UnsetTaskToEditAction;
+export type ListsAction = AddListAction | GetListsAction | GetListByIdAction | SetListIdToDeleteAction | SetListToEditAction | DeleteListAction | UpdateListAction | SetSelectedListAction | AddTaskAction | DeleteTaskAction | SetTaskToDeleteAction | UnsetTaskToDeleteAction | EditTaskAction | SetTaskToEditAction | UnsetTaskToEditAction | AddListActionFailed;
 
 export type NotificationAction = SetNotificationAction;
 
@@ -152,6 +161,8 @@ export interface ListState {
     task: Task;
     list: List;
   } | null;
+  errorAddList?: string;
+  successAddList?: string;
 }
 
 export interface NotificationState {

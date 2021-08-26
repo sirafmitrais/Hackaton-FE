@@ -1,14 +1,17 @@
 import React, {FC, useState, FormEvent} from 'react'
-import { addList } from '../store/action-creators/listActions'
+import { addList, getList } from '../store/action-creators/listActions'
 import { List } from '../store/action-types/types'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setNotification } from '../store/action-creators';
+
+import { RootState } from '../store/store'
 
 const CreateNewList: FC = () => {
 
    const dispatch = useDispatch()
-    const [listName, setListName] = useState('')
-
+   const [listName, setListName] = useState('')
+   const successAddList = useSelector((state: RootState) => state.list.successAddList);
+   
     const inputChangeHandler = (e: FormEvent<HTMLInputElement>) => {
         setListName(e.currentTarget.value)
     }
@@ -21,11 +24,15 @@ const CreateNewList: FC = () => {
         const newList: List = {
             id: `list-${new Date().getTime()}`,
             name: listName,
-            tasks: []
+            title: listName,
+            tasks: [],
         }
 
-        dispatch(addList(newList));
-        dispatch(setNotification(`New List (${newList.name}) created`))
+        dispatch(addList(listName));
+        dispatch(getList());
+        if(successAddList){
+          dispatch(setNotification(successAddList))
+        }
         setListName('')
     }
     return (

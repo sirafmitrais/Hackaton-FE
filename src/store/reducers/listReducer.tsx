@@ -1,5 +1,5 @@
 
-import { ADD_LIST, ADD_TASK, DELETE_LIST, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, Lists, ListsAction, ListState, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types"
+import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, Lists, ListsAction, ListState, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types"
 
 const initialState: ListState = {
     lists: {},
@@ -8,8 +8,8 @@ const initialState: ListState = {
     listById: null,
     selectedList: null,
     taskToDelete: null,
-    taskToEdit: null
-
+    taskToEdit: null, 
+    errorAddList: "",
 }
 
 // Helper function
@@ -37,13 +37,18 @@ const reducer =  (state =  initialState, action: ListsAction): ListState =>  {
             saveListsToLS(clonedListsFromLS);
             return {
                 ...state,
-                lists: clonedListsFromLS
+                successAddList: `Success Added Title ${action.payload.title}`
+            }
+        case ADD_LIST_FAILED:
+            return {
+                ...state,
+                errorAddList: action.payload
             }
 
         case GET_LISTS:
             return {
                 ...state,
-                lists: listsFromLS
+                lists: action.payload
             }
 
         case GET_LIST_BY_ID:

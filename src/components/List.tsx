@@ -9,7 +9,7 @@ import { RootState } from '../store/store'
 const Lists: FC = () => {
     const dispatch = useDispatch()
     const lists = useSelector((state: RootState) =>  state.list.lists)
-
+    console.log("list", lists);
     useEffect(() => {
        dispatch(getList())
     }, [dispatch])
@@ -34,7 +34,7 @@ const Lists: FC = () => {
             <div>
               {Object.values(lists).map((list: List) => {
                 return <div className="panel-block py-3" key={list.id}>
-                  <p onClick={() => setListToEditHandler(list.id)}> {list.name} </p>
+                  <p onClick={() => setListToEditHandler(list.id)}> {list.title} </p>
                   <span className="panel-icon has-text-danger" onClick={() => setListIdToDeleteHandler(list.id)}>
                        <i className="fas fa-times-circle"></i>
                   </span>
