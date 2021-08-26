@@ -24,7 +24,7 @@ const SelectList: FC = () => {
               {Object.keys(lists).length > 0 &&
                 Object.values(lists).map((list: List) => (
                   <option key={list.id} value={list.id}>
-                    {list.name}
+                    {list.title}
                   </option>
                 ))}
             </select>
