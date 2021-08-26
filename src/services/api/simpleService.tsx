@@ -29,6 +29,29 @@ class SimpleSrv {
         })
     }
 
+    static deleteTitle(idTitle: string){
+        return axios
+        .delete(`/${idTitle}`)
+        .then((res) => {
+            const response = res.data;
+            return response;
+        })
+        .catch((err) => {
+            throw err;
+        });
+    }
+
+    static update(idTitle: string, title: string){
+        return axios
+        .patch(`/${idTitle}`, { title })
+        .then((res) => {
+            const response = res.data;
+            return response;
+        })
+        .catch((err) => {
+            throw err;
+        });
+    }
     
 }
 

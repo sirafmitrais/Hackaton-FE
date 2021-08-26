@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, List, Lists, ListsAction, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, Task, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types";
+import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_LIST_FAILED, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, List, Lists, ListsAction, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, Task, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types";
 import SimpleSrv from "../../services/api/simpleService";
 
 export type DispatchList = (args: ListsAction) => ListsAction
@@ -65,20 +65,36 @@ export const setSelectedList = (id: string): ListsAction => {
     }
   }
 
-export const deleteList = (id: string): ListsAction => {
-    return {
-        type: DELETE_LIST,
-        payload: id
+export const deleteList = (id: string) => {
+    return (dispatch: DispatchList) => {
+        return SimpleSrv.deleteTitle(id)
+            .then((res) => {
+                return {
+                    type: DELETE_LIST,
+                    payload: res
+                }
+            })
+            .catch((err) => {
+                return {
+                    type: DELETE_LIST_FAILED,
+                    payload: err
+                }
+            })
     }
 }
 
-export const updateList = (id: string, name: string): ListsAction => {
-    return {
-        type: UPDATE_LIST,
-        payload: {
-            id,
-            name
-        }
+export const updateList = (id: string, title: string) => {
+    return (dispatch: DispatchList) => {
+        return SimpleSrv.update(id, title)
+            .then((res) => {
+                return {
+                    type: UPDATE_LIST, 
+                    payload: res
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 }
 

@@ -1,5 +1,5 @@
 
-import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, Lists, ListsAction, ListState, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types"
+import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_LIST_FAILED, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, Lists, ListsAction, ListState, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types"
 
 const initialState: ListState = {
     lists: {},
@@ -10,6 +10,8 @@ const initialState: ListState = {
     taskToDelete: null,
     taskToEdit: null, 
     errorAddList: "",
+    errorDeleteList: "",
+    successUpdateList: "",
 }
 
 // Helper function
@@ -69,16 +71,14 @@ const reducer =  (state =  initialState, action: ListsAction): ListState =>  {
                 listToEdit
             }
         case DELETE_LIST:
-            const clonedListsFromLS2 = {...listsFromLS};
-            const listId = clonedListsFromLS2[action.payload].id;
-            delete clonedListsFromLS2[action.payload];
-            saveListsToLS(clonedListsFromLS2);
             return {
                 ...state,
-                lists: clonedListsFromLS2,
-                listIdToDelete: '',
-                listById: null,
-                selectedList: state.selectedList && listId === state.selectedList.id ? null : state.selectedList
+                successDeleteList: `success delete ${action.payload}`
+            }
+        case DELETE_LIST_FAILED:
+            return {
+                ...state,
+                errorDeleteList: "delete failed"
             }
         case UPDATE_LIST:
             const clonedListsFromLS3 = {...listsFromLS};
@@ -86,8 +86,7 @@ const reducer =  (state =  initialState, action: ListsAction): ListState =>  {
             saveListsToLS(clonedListsFromLS3);
             return {
                 ...state,
-                lists: clonedListsFromLS3,
-                listToEdit: null
+                successUpdateList: `success update ${action.payload.name}`
             }
         case SET_SELECTED_LIST:
             const selectedList = getListsFromLS()[action.payload];
