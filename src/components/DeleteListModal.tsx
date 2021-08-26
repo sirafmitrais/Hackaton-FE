@@ -20,7 +20,7 @@ const DeleteListModal: FC<DeleteListModalProps> = ({ listId }) => {
   const deleteListHandler = () => {
     dispatch(deleteList(listId));
     if(list) {
-      dispatch(setNotification(`List "${list.name}" deleted!`, 'danger'));
+      dispatch(setNotification(`List "${list.title}" deleted!`, 'danger'));
     }
   }
 
