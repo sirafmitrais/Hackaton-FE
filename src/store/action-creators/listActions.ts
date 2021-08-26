@@ -1,11 +1,11 @@
-import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_LIST_FAILED, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, List, Lists, ListsAction, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, Task, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK } from "../action-types/types";
+import { ADD_LIST, ADD_LIST_FAILED, ADD_TASK, DELETE_LIST, DELETE_LIST_FAILED, DELETE_TASK, GET_LISTS, GET_LIST_BY_ID, List, Lists, ListsAction, SET_LISTID_TO_DELETE, SET_LIST_TO_EDIT, SET_SELECTED_LIST, SET_TASK_TO_DELETE, SET_TASK_TO_EDIT, Task, UNSET_TASK_TO_DELETE, UNSET_TASK_TO_EDIT, UPDATE_LIST, UPDATE_TASK, UserRequest } from "../action-types/types";
 import SimpleSrv from "../../services/api/simpleService";
 
 export type DispatchList = (args: ListsAction) => ListsAction
 
-export const addList = (title: string) => {
+export const addList = (datauser: UserRequest) => {
     return (dispatch: DispatchList) => {
-        return SimpleSrv.createTitle(title)
+        return SimpleSrv.createTitle(datauser)
             .then((response) => {
                 console.log("create response", response)
                 dispatch({

@@ -5,6 +5,17 @@ import instances from './AxiosInstance'
 
 const axios = instances.instancePlaceHolder.apiInstance()
 
+
+interface User {
+    users: {
+        first_name: string,
+        last_name: string,
+        password_hash: string,
+        role: string,
+        users: string
+    }
+  }
+
 class SimpleSrv {
     static getListTitle() {
         return axios.get('')
@@ -17,9 +28,9 @@ class SimpleSrv {
         })
     }
 
-    static createTitle(title: string) {
+    static createTitle(data1: User) {
         return axios
-        .post('',{title})
+        .post('',{data1})
         .then((res) => {
             const response = res.data
             return response

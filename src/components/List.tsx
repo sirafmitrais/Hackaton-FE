@@ -32,7 +32,8 @@ const Lists: FC = () => {
             <p className="py-4 has-text-centered">No Lists</p>
           :
             <div>
-              {Object.values(lists).map((list: any) => {
+              {Object.values(lists.data).map((list: any) => {
+              
                 return <div className="panel-block py-3" key={list.id}>
                   <p onClick={() => setListToEditHandler(list.id)}> {list.first_name} </p>
                   <span className="panel-icon has-text-danger" onClick={() => setListIdToDeleteHandler(list.id)}>

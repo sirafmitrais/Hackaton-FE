@@ -37,12 +37,17 @@ export interface List {
 
 export interface User {
   first_name: string,
-  id: string,
-  lastname: string,
+  last_name: string,
   password_hash: string,
   role: string,
   users: string
 }
+
+export interface UserRequest {
+  users: User 
+     
+}
+
 
 export interface Lists {
   [id: string]: List
