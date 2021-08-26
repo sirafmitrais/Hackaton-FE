@@ -12,6 +12,7 @@ import DeleteListModal from './components/DeleteListModal';
 import EditListModal from './components/EditListModal';
 import MainContent from './components/MainContent';
 import EditTaskModal from './components/editTaskModal';
+import DeleteTaskModal from './components/deleteTaskModal';
 
 
 const App: FC = () => {
@@ -26,6 +27,7 @@ const App: FC = () => {
 
   const listToEdit = useSelector((state: RootState) =>  state.list.listToEdit);
   const taskToEdit = useSelector((state: RootState) => state.list.taskToEdit);
+  const taskToDelete = useSelector((state: RootState) => state.list.taskToDelete);
 
 
 
@@ -43,6 +45,7 @@ const App: FC = () => {
       {listIdToDelete && <DeleteListModal listId={listIdToDelete} />}
       {listToEdit && <EditListModal list={listToEdit} /> }\
       {taskToEdit && <EditTaskModal taskToEdit={taskToEdit} />}
+      {taskToDelete && <DeleteTaskModal taskToDelete={taskToDelete} />}
       
 
       <h1>{amount}</h1>

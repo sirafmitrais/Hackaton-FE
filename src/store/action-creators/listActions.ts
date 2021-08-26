@@ -78,7 +78,7 @@ export const setTaskToDelete= (task: Task, list: List): ListsAction => {
     }
 }
 
-export const unsetTaskToDelet = ():ListsAction => {
+export const unsetTaskToDelete = ():ListsAction => {
     return {
         type: UNSET_TASK_TO_DELETE
     }
