@@ -29,12 +29,27 @@ export interface Task {
 export interface List {
   name: string;
   id: string;
+  first_name: string;
   title: string;
   tasks: Task[];
 }
 
+
+export interface User {
+  first_name: string,
+  id: string,
+  lastname: string,
+  password_hash: string,
+  role: string,
+  users: string
+}
+
 export interface Lists {
   [id: string]: List
+}
+
+export interface UserList {
+  [id: string]: User
 }
 
 // Actions
@@ -50,7 +65,7 @@ interface AddListActionFailed {
 
 interface GetListsAction {
   type: typeof GET_LISTS;
-  payload: Lists;
+  payload: UserList;
 }
 
 interface GetListByIdAction {
@@ -172,6 +187,7 @@ export interface ListState {
   errorDeleteList?: string;
   successDeleteList?: string;
   successUpdateList?: string;
+  userList: UserList;
 }
 
 export interface NotificationState {

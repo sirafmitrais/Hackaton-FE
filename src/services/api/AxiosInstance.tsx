@@ -6,7 +6,7 @@ const apiAxiosInstance = axios.create({
 });
 
 const apiAxiosInstance2 = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com/posts"
+  baseURL: "http://localhost:4000/api/user"
 })
 
 class instance {

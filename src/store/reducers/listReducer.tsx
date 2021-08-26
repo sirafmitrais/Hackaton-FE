@@ -12,6 +12,7 @@ const initialState: ListState = {
     errorAddList: "",
     errorDeleteList: "",
     successUpdateList: "",
+    userList: {}
 }
 
 // Helper function
@@ -50,7 +51,7 @@ const reducer =  (state =  initialState, action: ListsAction): ListState =>  {
         case GET_LISTS:
             return {
                 ...state,
-                lists: action.payload
+                userList: action.payload
             }
 
         case GET_LIST_BY_ID:

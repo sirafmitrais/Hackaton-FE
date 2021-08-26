@@ -2,13 +2,13 @@ import React, {FC, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getList, SetListIdToDelete, SetListToEdit } from '../store/action-creators/listActions'
-import { List } from '../store/action-types/types'
+import { List, UserList } from '../store/action-types/types'
 
 import { RootState } from '../store/store'
 
 const Lists: FC = () => {
     const dispatch = useDispatch()
-    const lists = useSelector((state: RootState) =>  state.list.lists)
+    const lists = useSelector((state: RootState) =>  state.list.userList)
     console.log("list", lists);
     useEffect(() => {
        dispatch(getList())
@@ -32,9 +32,9 @@ const Lists: FC = () => {
             <p className="py-4 has-text-centered">No Lists</p>
           :
             <div>
-              {Object.values(lists).map((list: List) => {
+              {Object.values(lists).map((list: any) => {
                 return <div className="panel-block py-3" key={list.id}>
-                  <p onClick={() => setListToEditHandler(list.id)}> {list.title} </p>
+                  <p onClick={() => setListToEditHandler(list.id)}> {list.first_name} </p>
                   <span className="panel-icon has-text-danger" onClick={() => setListIdToDeleteHandler(list.id)}>
                        <i className="fas fa-times-circle"></i>
                   </span>
